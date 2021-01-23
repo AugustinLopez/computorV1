@@ -1,4 +1,4 @@
-prog='python test3.py'
+prog='python3 ./computor.py'
 j=0
 i=1
 step()
@@ -14,7 +14,7 @@ j=$(($j+1))
 if [ "$1" = "" -o "$1" = "$j" ]; then
 	echo "==== $j.SUBJECT ===="
 	i=1
-	step "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0" "0.905\n-0.475"
+	step "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0" "0.905...\n-0.475..."
 	step "5 * X^0 + 4 * X^1 = 4 * X^0" "-0.25"
 	step "8 * X^0 - 6 * X^1 + 0 * X^2 - 5.6 * X^3 = 3 * X^0" "No Solution"
 	step "5 + 4 * X + X^2= X^2" "-1.25/No Crash"

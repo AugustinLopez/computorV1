@@ -265,8 +265,16 @@ class Polynomial:
             self.determinant=None
             return None
         a=self.coef[2]
-        b=self.coef[1]
-        c=self.coef[0]
+        try:
+            b=self.coef[1]
+        except:
+            self.coef[1] = 0.0
+            b = 0.0
+        try:
+            c=self.coef[0]
+        except:
+            self.coef[0] = 0.0
+            c = 0.0
         self.determinant=b**2-4*a*c
         return self.determinant
 
@@ -363,7 +371,10 @@ class Polynomial:
                   "I can't solve.")
         elif self.degree==0:
             print("The equation is:")
-            print((self.coef[0]==0))
+            if self.coef.get(0) is None:
+                print(True)
+            else:
+                print((self.coef[0]==0))
         elif self.degree==1:
             print("The solution is:")
             print(self.__sol(self.coef[0],self.coef[1]))
@@ -393,11 +404,21 @@ class Polynomial:
                 print(self.__sol(self.coef[1]+deter**0.5,2*self.coef[2]))
                 print(self.__sol(self.coef[1]-deter**0.5,2*self.coef[2]))
 
+def usage():
+    print()
+    print("Usage: ./computor [-d/-l/-h] \"argument\"", sep="")
+    print("\t-d (debug)\t print step-by-step analysis")
+    print("\t-l (lcm)  \t try printing irreductible fractions")
+    print("\t-h (help) \t print usage")
+
 
 if __name__ == "__main__":
     i=1
     helper=False
-    if len(argv) > 2:
+    if len(argv) == 1:
+        usage()
+        helper=True
+    if len(argv) >= 2:
         while argv[i]=="-d" or argv[i]=="-l":
             if argv[i]=="-d":
                 Polynomial.debug=True
@@ -405,11 +426,7 @@ if __name__ == "__main__":
                 Polynomial.lcm=True
             i=i+1
         if argv[i]=="-h":
-            print()
-            print("Usage: ./computor [-d/-l/-h] \"argument\"", sep="")
-            print("\t-d (debug)\t print step-by-step analysis")
-            print("\t-l (lcm)  \t try printing irreductible fractions")
-            print("\t-h (help) \t print usage")
+            usage()
             helper=True
     if len(argv) > i and helper==False:
         try:
