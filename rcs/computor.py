@@ -377,7 +377,10 @@ class Polynomial:
                 print((self.coef[0]==0))
         elif self.degree==1:
             print("The solution is:")
-            print(self.__sol(self.coef[0],self.coef[1]))
+            if self.coef.get(0) is None:
+                print(self.__sol(0.0,self.coef[1]))
+            else:
+                print(self.__sol(self.coef[0],self.coef[1]))
         elif self.degree==2:
             deter=self.determinant()
             if deter<0:

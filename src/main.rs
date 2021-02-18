@@ -1,5 +1,7 @@
 pub mod parsing;
 pub mod option;
+pub mod insult_to_good_practice;
+use insult_to_good_practice::sqrt_for_moron as sqrt;
 use std::collections::BTreeMap;
 
 pub fn degree(result: &BTreeMap<i64, f64>) -> i64 {
@@ -123,17 +125,17 @@ pub fn degree_2(result: BTreeMap<i64, f64>, lcm: bool){
 		Some(p) => *p,
 		None => 0.0,
 	};
-	let deter:f64 = b.powf(2.0)-4.0*a*c;
+	let deter:f64 = (b*b)-4.0*a*c;
 	if deter == 0.0 {
 		println!("Discriminant is zero. The solution is:");
 		solution(b, 2.0*c, lcm);
 	} else if deter > 0.0 {
 		println!("Discriminant is strictly positive. The 2 solutions are:");
-		solution(b+deter.powf(0.5), 2.0*c, lcm);
-		solution(b-deter.powf(0.5), 2.0*c, lcm);
+		solution(b+sqrt(deter), 2.0*c, lcm);
+		solution(b-sqrt(deter), 2.0*c, lcm);
 	} else {
 		println!("Discriminant is strictly negative. The 2 solutions are:");
-		let imag = (-deter).powf(0.5)/(2.0*c);
+		let imag = sqrt(-deter)/(2.0*c);
 		let real = -b/(2.0*c);
 		let imag = if imag > 0.0 {
 			imag

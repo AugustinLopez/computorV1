@@ -21,7 +21,7 @@ pub fn argument_option(argument: &String, option: &mut(ODebug, OLcm)) -> RetVal 
 	}
 	match argument.chars().nth(1) {
 		Some(c) => {
-			if c.is_ascii_digit() || c == ' ' {
+			if c.is_ascii_digit() || c == ' ' || c == 'X' || c == 'x' {
 				return RetVal::StopIter;
 			}
 		}
