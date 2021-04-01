@@ -28,6 +28,17 @@ class Polynomial:
             print("Polynomial initialized from '", msg, "'",sep="")
             print(self)
 
+    def __sqrt(self, x: float) -> float:
+        if x > 1.0:
+            d = x
+        else:
+            d = 1.0
+        for _ in range(100):
+            y = d
+            d = (x / d + d) * 0.5
+            if d >= y:
+                return y
+        return y
 
     def __init_from_list(self, coefficients):
         """
@@ -275,7 +286,7 @@ class Polynomial:
         except:
             self.coef[0] = 0.0
             c = 0.0
-        self.determinant=b**2-4*a*c
+        self.determinant=b*b-4*a*c
         return self.determinant
 
 
@@ -386,7 +397,7 @@ class Polynomial:
             if deter<0:
                 print("Discriminant is strictly negative", \
                       ", the two solutions are:", sep="")
-                imag=(-deter)**0.5/(2*self.coef[2])
+                imag=self.__sqrt(-deter)/(2*self.coef[2])
                 if imag==int(imag):
                     imag=int(imag)
                 real=-self.coef[1]/(2*self.coef[2])
@@ -404,8 +415,8 @@ class Polynomial:
             elif deter>0:
                 print("Discriminant is strictly positive", \
                       ", the two solutions are:", sep="")
-                print(self.__sol(self.coef[1]+deter**0.5,2*self.coef[2]))
-                print(self.__sol(self.coef[1]-deter**0.5,2*self.coef[2]))
+                print(self.__sol(self.coef[1]+self.__sqrt(deter), 2*self.coef[2]))
+                print(self.__sol(self.coef[1]-self.__sqrt(deter), 2*self.coef[2]))
 
 def usage():
     print()

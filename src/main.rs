@@ -1,8 +1,25 @@
 pub mod parsing;
 pub mod option;
-pub mod insult_to_good_practice;
-use insult_to_good_practice::sqrt_for_moron as sqrt;
 use std::collections::BTreeMap;
+
+pub fn sqrt(x: f64) -> f64 {
+	if x <= 0.0 {
+		return -1.0;
+	}
+	let mut y = match x {
+		i if i > 1.0 => x,
+		_ => 1.0,
+	};
+	let mut ret = y;
+	for _ in 0..100 {
+		ret = y;
+		y = (x / y + y) / 2.0;
+		if y >= ret {
+			break ;
+		}
+	}
+	ret
+}
 
 pub fn degree(result: &BTreeMap<i64, f64>) -> i64 {
 	let mut degree = 0;

@@ -1,4 +1,4 @@
-prog='python3 ./computor.py'
+prog='../computor'
 j=0
 i=1
 step()
